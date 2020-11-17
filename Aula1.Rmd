@@ -1,0 +1,49 @@
+---
+title: "Aula 1"
+author: "Harlon Romariz"
+date: "17/11/2020"
+output: pdf_document
+---
+
+```{r setup, include=FALSE, echo=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+
+library(descr)
+
+```
+
+```{r dados, echo=FALSE}
+
+id <- c("João", "Ana", "Maria", "José", "Carla")
+
+idade <- c(23, 22, 24, 44, 34)
+
+renda <- c(1.2, 1.5, 2.3, 2.2, 1.8)
+
+cor <- c("Preto", "Pardo", "Pardo", "Branco", "Amarelo")
+
+bd <- data.frame(id, idade, renda, cor)
+```
+
+# Apresentação
+Texto.
+
+# Introdução
+Comentários.
+
+# 1 Descrição
+## 1.1 Cor/Raça
+```{r cor, echo=FALSE}
+
+freq(bd$cor)
+```
+
+## 1.2 Renda
+```{r renda, echo=FALSE}
+
+paste("Média da renda")
+mean(bd$renda)
+
+paste("Desvio padrão da renda")
+sd(bd$renda)
+```
