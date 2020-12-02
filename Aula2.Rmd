@@ -1,0 +1,87 @@
+---
+title: "Aula 2"
+author: "Harlon Romariz"
+date: "29/11/2020"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+library(haven)
+library(readxl)
+library(descr)
+library(memisc)
+```
+
+```{r load, echo=FALSE}
+
+#Tipo 01: RData
+
+load("C:/BD/Teste.Rdata")
+
+#Tipo 02: csv
+
+exemplo <- read.csv2("C:/BD/Exemplo.csv")
+
+file.head("C:/BD/TS_ESCOLA_SAEB17.csv")
+
+esc_17 <- read.csv2("C:/BD/TS_ESCOLA_SAEB17.csv", sep = ",", dec = ".", header = T)
+
+#Tipo 03: .txt
+
+file.head("C:/BD/Texto.txt")
+
+texto <- read.csv("C:/BD/Texto.txt", sep = ";", dec = ".", header = T)
+
+View(texto)
+
+#Tipo 04: .sav
+
+caged17 <- read_sav("C:/BD/CAGED_2017.sav")
+
+# Tipo 05: .xls ou .xlsx
+
+atlas <- read_excel("C:/BD/atlas2013_uf_br.xlsx")
+```
+
+```{r manipulcacoes, echo=FALSE}
+
+exemplo_esc <- subset(exemplo, select = c("escola", "nota_mt", "nota_lp"))
+
+freq(exemplo_esc$escola)
+
+View(atlas)
+
+bd_atlas <- subset(atlas, (atlas$ANO == "2010"), select = c("ANO", "UFN", "ESPVIDA", "GINI"))
+
+View(bd_atlas)
+
+mean(bd_atlas$ESPVIDA)
+
+mean(bd_atlas$GINI)
+
+
+bd_atlas <- subset(atlas, (atlas$ANO == "2000" | atlas$ANO == "2010"), select = c("ANO", "UFN", "ESPVIDA", "GINI"))
+
+View(bd_atlas)
+
+
+esc <- recode(factor(exemplo$escola),
+              "Privada" <- c("Privada"), 
+"Pública" <- c("Pública", 
+"Pública diferenciada"))
+
+freq(esc)
+
+media <- ((exemplo$nota_mt + exemplo$nota_lp) / 2)
+
+exemplo_esc <- cbind(exemplo_esc, media)
+
+View(exemplo_esc)
+
+tapply(media, esc, mean)
+
+tapply(media, esc, mean, na.rm=T)
+```
+
