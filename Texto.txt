@@ -1,0 +1,6 @@
+name;gender;race;income
+John;M;Black;1556.77
+Anne;F;White;1878.88
+Juan;M;Latino;1654.86
+Robert;M;White;1889.32
+Julia;F;Black;1432.21
